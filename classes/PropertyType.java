@@ -1,6 +1,9 @@
 package classes;
 
+import global.Globals;
+import utils.MyString;
 import utils.Prints;
+import utils.Utils;
 
 public class PropertyType {
     public static final int APARTAMENT = 1;
@@ -51,5 +54,47 @@ public class PropertyType {
             case APARTAMENT:
                 return "Apartment";
         }
+    }
+
+    public static int getPropertyTypeFromUser() {
+        // O(n * k)
+        return PropertyType.getPropertyTypeFromUserOrSkip(PropertyType.INVALID_PROPERTY_TYPE);
+    }
+
+    public static int getPropertyTypeFromUserLoopOnError(int findAll) {
+        int propertyType;
+        do {
+            PropertyType.printPropertyTypes();
+            Prints.printfln("_§purple_%d) _§blue_Find all", findAll);
+            propertyType = getPropertyTypeFromUserOrSkip(findAll);
+        } while (propertyType == PropertyType.INVALID_PROPERTY_TYPE);
+
+        return propertyType;
+    }
+
+    public static int getPropertyTypeFromUserOrSkip(int skipValue) {
+        // O(n * k)
+        String userInput;
+        int userInputNumber;
+
+        Prints.printf("Please enter the number of property type: ");
+        userInput = Globals.SCANNER.nextLine();
+
+        if (!MyString.isNumber(userInput)) {
+            return PropertyType.INVALID_PROPERTY_TYPE;
+        }
+
+        userInputNumber = Utils.parseInt(userInput);
+
+        if (!PropertyType.isPropertyType(userInputNumber)) {
+
+            if (userInputNumber == skipValue) {
+                return skipValue;
+            }
+
+            return PropertyType.INVALID_PROPERTY_TYPE;
+        }
+
+        return userInputNumber;
     }
 }

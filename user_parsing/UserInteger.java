@@ -32,6 +32,7 @@ public class UserInteger {
 
         if (!MyString.isNumber(str)) {
             this.isValidNumber = false;
+            return;
         }
 
         this.isValidNumber = true;
@@ -41,6 +42,8 @@ public class UserInteger {
 
     public int getNumberFromUser(String title) {
         // O(n * k)
+        this.isValidNumber = false;
+
         do {
             Prints.printf(title);
 

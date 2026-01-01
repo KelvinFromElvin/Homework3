@@ -4,6 +4,7 @@ import global.Globals;
 import myArrays.PropertyArray;
 import myArrays.UserArray;
 import user_parsing.UserBoolean;
+import user_parsing.UserCreate;
 import user_parsing.UserInteger;
 import utils.MyString;
 import utils.Prints;
@@ -120,9 +121,9 @@ public class RealEstate {
         User user = new User();
 
         user.setUsername(this.getFreeUsernameFromUser());
-        user.setPassword(this.getStrongPasswordFromUser());
-        user.setPhone(this.getPhoneFromUser());
-        user.setIsRegularUser(this.getIsRegularUserFromUser());
+        user.setPassword(UserCreate.getStrongPasswordFromUser());
+        user.setPhone(UserCreate.getPhoneFromUser());
+        user.setIsRegularUser(UserCreate.getIsRegularUserFromUser());
 
         this.users = UserArray.appentToUsersArray(this.users, user);
 
@@ -158,52 +159,6 @@ public class RealEstate {
         } while (isUsernameExists);
 
         return username;
-    }
-
-    private String getStrongPasswordFromUser() {
-        // O(k * k)
-        String password;
-        String errorMsg;
-
-        do {
-            Prints.printf("Please enter strong password (min 5 chars, atleats $ %% _,atleats 1 number): ");
-
-            password = Globals.SCANNER.nextLine();
-
-            errorMsg = User.isPasswordString(password);
-
-            if (errorMsg != null) {
-                Prints.printErrorMsg("%s", errorMsg);
-            }
-        } while (errorMsg != null);
-
-        return password;
-    }
-
-    private String getPhoneFromUser() {
-        // O(n * k)
-        String phone;
-
-        boolean isPhoneValid;
-
-        do {
-            Prints.printf("Please enter phone number: ");
-            phone = Globals.SCANNER.nextLine();
-
-            isPhoneValid = User.isIsrPhoneNumbers(phone);
-
-            if (!isPhoneValid) {
-                Prints.printErrorMsg("%s is not a valid israel phone number, please choose valid israel phone number",
-                        phone);
-            }
-        } while (!isPhoneValid);
-
-        return phone;
-    }
-
-    private boolean getIsRegularUserFromUser() {
-        // O(k)
-        return UserBoolean.getUserBoolean("Are you regular user?");
     }
 
     // Login
@@ -267,7 +222,7 @@ public class RealEstate {
         }
 
         PropertyType.printPropertyTypes();
-        selectedType = this.getPropertyTypeFromUser();
+        selectedType = PropertyType.getPropertyTypeFromUser();
         if (selectedType == PropertyType.INVALID_PROPERTY_TYPE) {
             Prints.printErrorMsg("You did not select property type from list.");
             return false;
@@ -397,37 +352,6 @@ public class RealEstate {
         return null;
     }
 
-    private int getPropertyTypeFromUser() {
-        // O(n * k)
-        return this.getPropertyTypeFromUserOrSkip(PropertyType.INVALID_PROPERTY_TYPE);
-    }
-
-    private int getPropertyTypeFromUserOrSkip(int skipValue) {
-        // O(n * k)
-        String userInput;
-        int userInputNumber;
-
-        Prints.printf("Please enter the number of property type: ");
-        userInput = Globals.SCANNER.nextLine();
-
-        if (!MyString.isNumber(userInput)) {
-            return PropertyType.INVALID_PROPERTY_TYPE;
-        }
-
-        userInputNumber = Utils.parseInt(userInput);
-
-        if (!PropertyType.isPropertyType(userInputNumber)) {
-
-            if (userInputNumber == skipValue) {
-                return skipValue;
-            }
-
-            return PropertyType.INVALID_PROPERTY_TYPE;
-        }
-
-        return userInputNumber;
-    }
-
     // Remove users property
     public void removePropertyMenu(User user) {
         // O(n1 * n2 * n3 * n4)
@@ -532,14 +456,15 @@ public class RealEstate {
         rentingUserInput = UserBoolean.getUserBooleanOrSkip("do you want to rent?", FIND_ALL + "");
         renting = rentingUserInput == UserBoolean.USER_INPUT_TRUE;
 
-        PropertyType.printPropertyTypes();
-        Prints.printfln("_§purple_%d) _§blue_Find all", FIND_ALL);
-        propertyType = this.getPropertyTypeFromUserOrSkip(FIND_ALL);
+        propertyType = PropertyType.getPropertyTypeFromUserLoopOnError(FIND_ALL);
 
-        roomNumber = userInteger.getNumberFromUser("Please enter the number of rooms: ");
+        roomNumber = userInteger
+                .getNumberFromUser("Please enter the number of rooms_§blue_(" + FIND_ALL + " to skip)_§: ");
 
-        minUserPrice = userInteger.getNumberFromUser("Please enter the minimum price: ");
-        maxUserPrice = userInteger.getNumberFromUser("Please enter the maximum price: ");
+        minUserPrice = userInteger
+                .getNumberFromUser("Please enter the minimum price_§blue_(" + FIND_ALL + " to skip)_§: ");
+        maxUserPrice = userInteger
+                .getNumberFromUser("Please enter the maximum price_§blue_(" + FIND_ALL + " to skip)_§: ");
 
         return this.searchProperiesByParameters(
                 renting,
