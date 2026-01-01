@@ -66,6 +66,7 @@ public class PrintTable {
     }
 
     private void addColMaxLen() {
+        // O(n)
         int[] newColMaxLen = new int[this.colMaxLen.length + 1];
 
         for (int i = 0; i < this.colMaxLen.length; i++) {
