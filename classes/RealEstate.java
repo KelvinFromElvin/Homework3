@@ -245,6 +245,7 @@ public class RealEstate {
         String selectedStreet;
         int selectedType;
         Property property = new Property();
+        UserInteger userInteger = new UserInteger();
 
         if (!this.isUserAllowedToPostNewProperty(user)) {
             Prints.printErrorMsg("You riched the limit of properits to post.");
@@ -277,8 +278,19 @@ public class RealEstate {
         property.setType(selectedType);
 
         if (PropertyType.isApartament(selectedType)) {
-            this.fillApartamentDitails(property);
+            property.setFloor(userInteger.getNumberFromUser("Please enter the floor: "));
         }
+
+        property.setNumberOfRooms(userInteger.getNumberFromUser("Please enter the number of rooms: "));
+        property.setHouseNumber(userInteger.getNumberFromUser("Please enter house number: "));
+        property.setAvalibleForRenting(UserBoolean.getUserBoolean("Renting?"));
+
+        do {
+            userInteger.getNumberFromUser("Please enter property price (price > 0): ");
+        } while (userInteger.getNumber() <= 0);
+        property.setPrice(userInteger.getNumber());
+
+        property.setUser(user);
 
         this.properties = PropertyArray.appentToPropertiesArray(this.properties, property);
 
@@ -302,11 +314,11 @@ public class RealEstate {
         // O(n * k)
         int postedPropertis = this.countPublishedProperiesOfUser(user);
 
-        if (user.getIsRegularUser() && postedPropertis > RealEstate.POST_LIMIT_REGULAR_USER) {
+        if (user.getIsRegularUser() && postedPropertis >= RealEstate.POST_LIMIT_REGULAR_USER) {
             return false;
         }
 
-        if (!user.getIsRegularUser() && postedPropertis > RealEstate.POST_LIMIT_SAILS_MAN_USER) {
+        if (!user.getIsRegularUser() && postedPropertis >= RealEstate.POST_LIMIT_SAILS_MAN_USER) {
             return false;
         }
 
@@ -377,13 +389,9 @@ public class RealEstate {
         streetInput = Globals.SCANNER.nextLine();
 
         if (MyString.isNumber(streetInput)) {
-            if (city.isStreetExistsByIdx(streetInput)) {
-                return city.getStreetByIdx(streetInput);
-            }
-        } else {
-            if (city.isStreetExists(streetInput)) {
-                return streetInput;
-            }
+            return city.getStreetByIdx(streetInput);
+        } else if (city.isStreetExists(streetInput)) {
+            return streetInput;
         }
 
         return null;
@@ -418,21 +426,6 @@ public class RealEstate {
         }
 
         return userInputNumber;
-    }
-
-    private void fillApartamentDitails(Property property) {
-        // O(n * k * t)
-        UserInteger userInteger = new UserInteger();
-
-        property.setFloor(userInteger.getNumberFromUser("Please enter the floor: "));
-        property.setNumberOfRooms(userInteger.getNumberFromUser("Please enter the number of rooms: "));
-        property.setHouseNumber(userInteger.getNumberFromUser("Please enter house number: "));
-        property.setAvalibleForRenting(UserBoolean.getUserBoolean("Renting?"));
-
-        do {
-            userInteger.getNumberFromUser("Please enter property price (price > 0): ");
-        } while (userInteger.getNumber() <= 0);
-        property.setPrice(userInteger.getNumber());
     }
 
     // Remove users property

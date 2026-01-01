@@ -67,7 +67,6 @@ public class UserMenu {
                 break;
             case LOGOUT:
             default:
-                System.out.println("!!!!!!!!!!!!!!!");
                 exitFromMenu = true;
                 break;
         }

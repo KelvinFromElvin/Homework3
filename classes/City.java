@@ -31,20 +31,38 @@ public class City {
         return this.streets;
     }
 
-    public String getStreetByIdx(String street) {
-        // O(n) - because of street
+    public String getStreetByIdx(String streetIndex) {
+        // O(n)
         final String INVALID_ARGUMENT = null;
-
         int streetIdx = -1;
 
-        if (!this.isStreetExistsByIdx(street)) {
+        if (!MyString.isNumber(streetIndex)) {
             return INVALID_ARGUMENT;
         }
 
-        streetIdx = Utils.parseInt(street);
+        streetIdx = Utils.parseInt(streetIndex) - 1;
 
-        return this.getStreets()[streetIdx];
+        if (streetIdx >= 0 && streetIdx < this.streets.length) {
+            return this.getStreets()[streetIdx];
+        }
+
+        return INVALID_ARGUMENT;
     }
+
+    // public String getStreetByIdx(String street) {
+    // // O(n) - because of street
+    // final String INVALID_ARGUMENT = null;
+
+    // int streetIdx = -1;
+
+    // if (!this.isStreetExistsByIdx(street)) {
+    // return INVALID_ARGUMENT;
+    // }
+
+    // streetIdx = Utils.parseInt(street) - 1;
+
+    // return this.getStreets()[streetIdx];
+    // }
 
     // Setters
     public void setName(String name) {
@@ -85,19 +103,6 @@ public class City {
         }
 
         return false;
-    }
-
-    public boolean isStreetExistsByIdx(String street) {
-        // O(n)
-        int streetIdx = -1;
-
-        if (!MyString.isNumber(street)) {
-            return false;
-        }
-
-        streetIdx = Utils.parseInt(street) - 1;
-
-        return (streetIdx >= 0 && streetIdx < this.streets.length);
     }
 
     public void printStreets() {
