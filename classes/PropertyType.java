@@ -80,6 +80,10 @@ public class PropertyType {
         Prints.printf("Please enter the number of property type: ");
         userInput = Globals.SCANNER.nextLine();
 
+        if (MyString.isStringEmpty(userInput)) {
+            return PropertyType.INVALID_PROPERTY_TYPE;
+        }
+
         if (!MyString.isNumber(userInput)) {
             return PropertyType.INVALID_PROPERTY_TYPE;
         }

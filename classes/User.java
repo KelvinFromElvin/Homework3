@@ -13,6 +13,10 @@ public class User {
          */
         final int MIN_PASSWORD_CHARS = 5;
 
+        if (MyString.isStringEmpty(password)) {
+            return "password is requred";
+        }
+
         if (password.length() < MIN_PASSWORD_CHARS) {
             return "password must be atleast " + MIN_PASSWORD_CHARS + " characters";
         }
@@ -32,6 +36,10 @@ public class User {
         // O(k)
         final int ISR_PHONE_NUMBER_LEN = 10;
         final String ISR_PHONE_NUMBER_PREFIX = "05";
+
+        if (MyString.isStringEmpty(phone)) {
+            return false;
+        }
 
         if (phone.length() != ISR_PHONE_NUMBER_LEN) {
             return false;

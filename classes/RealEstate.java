@@ -16,6 +16,7 @@ public class RealEstate {
     private static final int FIND_ALL = -999;
 
     private static final int PROPERTY_NOT_FOUND = -1;
+    private static final City INVALID_CITY = null;
 
     private User[] users;
     private Property[] properties;
@@ -146,17 +147,27 @@ public class RealEstate {
         String username;
 
         boolean isUsernameExists;
+        boolean isInvalidInput;
 
         do {
             Prints.printf("Please enter username: ");
             username = Globals.SCANNER.nextLine();
+
+            isInvalidInput = false;
+            isUsernameExists = true;
+
+            if (MyString.isStringEmpty(username)) {
+                Prints.printErrorMsg("Please input something");
+                isInvalidInput = true;
+                continue;
+            }
 
             isUsernameExists = this.checkIfUsernameExists(username);
 
             if (isUsernameExists) {
                 Prints.printErrorMsg("%s already exists, please choose another username", username);
             }
-        } while (isUsernameExists);
+        } while (isUsernameExists && isInvalidInput);
 
         return username;
     }
@@ -184,13 +195,19 @@ public class RealEstate {
 
     private User findUser(String username, String password) {
         // O(n * k)
+        final User INVALID_ARGS = null;
+
+        if (MyString.isStringEmpty(username) || MyString.isStringEmpty(password)) {
+            return INVALID_ARGS;
+        }
+
         for (int i = 0; i < this.users.length; i++) {
             if (this.users[i].isMyCreds(username, password)) {
                 return this.users[i];
             }
         }
 
-        return null;
+        return INVALID_ARGS;
     }
 
     // Post new propery
@@ -209,7 +226,7 @@ public class RealEstate {
 
         this.printCities();
         selectedCity = getCityFromUser();
-        if (selectedCity == null) {
+        if (selectedCity == INVALID_CITY) {
             Prints.printErrorMsg("You did not select city from list.");
             return false;
         }
@@ -296,6 +313,10 @@ public class RealEstate {
         Prints.printf("Please enter the number / name of city: ");
         cityInput = Globals.SCANNER.nextLine();
 
+        if (MyString.isStringEmpty(cityInput)) {
+            return INVALID_CITY;
+        }
+
         if (MyString.isNumber(cityInput)) {
             selectedCity = this.getCityByCityNumber(cityInput);
         } else {
@@ -307,11 +328,10 @@ public class RealEstate {
 
     private City getCityByCityNumber(String cityNumber) {
         // O(k)
-        final City INVALID_ARGUMENT = null;
         int cityIdx = -1;
 
         if (!MyString.isNumber(cityNumber)) {
-            return INVALID_ARGUMENT;
+            return INVALID_CITY;
         }
 
         cityIdx = Utils.parseInt(cityNumber) - 1;
@@ -320,7 +340,7 @@ public class RealEstate {
             return this.cities[cityIdx];
         }
 
-        return INVALID_ARGUMENT;
+        return INVALID_CITY;
     }
 
     private City getCityByCityStr(String city) {
@@ -333,15 +353,20 @@ public class RealEstate {
             }
         }
 
-        return null;
+        return INVALID_CITY;
     }
 
     private String getStreetFromUser(City city) {
         // O(n * k)
+        final String INVALID_ARG = null;
         String streetInput;
 
         Prints.printf("Please enter the number / name of city: ");
         streetInput = Globals.SCANNER.nextLine();
+
+        if (MyString.isStringEmpty(streetInput)) {
+            return INVALID_ARG;
+        }
 
         if (MyString.isNumber(streetInput)) {
             return city.getStreetByIdx(streetInput);
@@ -349,7 +374,7 @@ public class RealEstate {
             return streetInput;
         }
 
-        return null;
+        return INVALID_ARG;
     }
 
     // Remove users property

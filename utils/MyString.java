@@ -22,6 +22,10 @@ public class MyString {
         // O(k)
         int charNum;
 
+        if (MyString.isStringEmpty(str)) {
+            return false;
+        }
+
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(0) == '-') {
                 continue;
@@ -65,5 +69,15 @@ public class MyString {
         }
 
         return str;
+    }
+
+    private static String removeAllSpaces(String str) {
+        return str.replace(" ", "");
+    }
+
+    public static boolean isStringEmpty(String str) {
+        String tempString = removeAllSpaces(str);
+
+        return tempString == null || tempString.equals("");
     }
 }

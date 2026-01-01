@@ -29,9 +29,13 @@ public class UserInteger {
     public void getAnyNumberFromUser() {
         // O(k)
         String str = Globals.SCANNER.nextLine();
+        this.isValidNumber = false;
+
+        if (MyString.isStringEmpty(str)) {
+            return;
+        }
 
         if (!MyString.isNumber(str)) {
-            this.isValidNumber = false;
             return;
         }
 
