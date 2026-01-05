@@ -59,8 +59,8 @@ public class PropertyArray {
         printTable.addData("Renting");
         printTable.addData("House number");
         printTable.addData("Floor");
-        printTable.addData("Seller name");
-        printTable.addData("Seller phone");
+        printTable.addData("Name");
+        printTable.addData("Phone");
 
         for (int i = 0; i < userProperties.length; i++) {
             printTable.addRow();
