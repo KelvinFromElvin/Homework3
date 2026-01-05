@@ -8,6 +8,7 @@ import classes.User;
 
 public class RealEstateInit {
     public static Property[] initProperties(User[] users, City[] cities) {
+        // O(1)
         if (users == null || users.length == 0 || cities == null || cities.length == 0) {
             return null;
         }
@@ -43,6 +44,7 @@ public class RealEstateInit {
     }
 
     public static User[] initUsers() {
+        // O(1)
         User[] users = new User[] {
                 new User("123", "Aa123456%", "0500000123", true),
                 new User("234", "Aa123456%", "0500000234", false)
@@ -52,6 +54,7 @@ public class RealEstateInit {
     }
 
     public static City[] initCities() {
+        // O(n * k)
         final int CITIES_LEN = 10;
 
         City city;
