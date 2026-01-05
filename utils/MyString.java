@@ -72,10 +72,12 @@ public class MyString {
     }
 
     private static String removeAllSpaces(String str) {
+        // O(k)
         return str.replace(" ", "");
     }
 
     public static boolean isStringEmpty(String str) {
+        // O(k)
         String tempString = removeAllSpaces(str);
 
         return tempString == null || tempString.equals("");

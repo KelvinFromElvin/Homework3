@@ -134,7 +134,7 @@ public class RealEstate {
     private boolean checkIfUsernameExists(String username) {
         // O(n * k)
         for (int i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername().equals(username)) {
+            if (this.users[i].isUsernameEquals(username)) {
                 return true;
             }
         }
@@ -167,7 +167,7 @@ public class RealEstate {
             if (isUsernameExists) {
                 Prints.printErrorMsg("%s already exists, please choose another username", username);
             }
-        } while (isUsernameExists && isInvalidInput);
+        } while (isUsernameExists || isInvalidInput);
 
         return username;
     }
@@ -345,10 +345,8 @@ public class RealEstate {
 
     private City getCityByCityStr(String city) {
         // O(n * k)
-        city = city.toLowerCase();
-
         for (int i = 0; i < this.cities.length; i++) {
-            if (this.cities[i].getName().toLowerCase().equals(city)) {
+            if (this.cities[i].isSameName(city)) {
                 return this.cities[i];
             }
         }
@@ -411,7 +409,7 @@ public class RealEstate {
     private boolean didUserPostProperty(User user) {
         // O(n * k)
         for (int i = 0; i < this.properties.length; i++) {
-            if (this.properties[i].getUser().getUsername().equals(user.getUsername())) {
+            if (this.properties[i].getUser().isUsernameEquals(user.getUsername())) {
                 return true;
             }
         }

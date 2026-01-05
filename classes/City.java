@@ -96,4 +96,13 @@ public class City {
             Prints.printfln("_§purple_%d) _§blue_%s", (i + 1), this.streets[i]);
         }
     }
+
+    public boolean isSameName(String cityName) {
+        // O(k)
+        if (MyString.isStringEmpty(cityName) || MyString.isStringEmpty(this.name)) {
+            return false;
+        }
+
+        return cityName.toLowerCase().equals(this.name.toLowerCase());
+    }
 }

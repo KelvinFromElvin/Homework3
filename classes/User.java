@@ -129,6 +129,17 @@ public class User {
         return this.username.equals(username) && this.password.equals(password);
     }
 
+    public boolean isUsernameEquals(String username) {
+        if (MyString.isStringEmpty(username)) {
+            return false;
+        }
+        if (MyString.isStringEmpty(this.username)) {
+            return false;
+        }
+
+        return this.username.equals(username);
+    }
+
     @Override
     public String toString() {
         // O(k * k)
