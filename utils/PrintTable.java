@@ -3,6 +3,9 @@ package utils;
 public class PrintTable {
     public static final int DEFAULT_PADDING_COUNT = 2;
     public static final char PADDING_CHAR = ' ';
+    public static final int DEFAULT_MIN_DATA_LEN = 5;
+    public static final int DEFAULT_MAX_DATA_LEN = 10;
+    public static final boolean IS_DEFAULT_MAX_DATA_LEN_ACTIVE = true;
 
     private static final String TABLE_LINES_COLOR = "_§cyan_";
     private static final String TABLE_HEADER_COLOR = "_§red_";
@@ -28,11 +31,37 @@ public class PrintTable {
     private int paddingCount;
     private String padding;
     private int[] colMaxLen;
+    private int maxDataLen;
+    private boolean isMaxDataLenActive;
 
     public PrintTable() {
+        // this.body = new String[0][0];
+        // this.setPaddingCount(DEFAULT_PADDING_COUNT);
+        // this.colMaxLen = new int[0];
+        // this.isMaxDataLenActive = IS_DEFAULT_MAX_DATA_LEN_ACTIVE;
+        // this.maxDataLen = DEFAULT_MAX_DATA_LEN;
+        this.initPrintTable(DEFAULT_MAX_DATA_LEN, IS_DEFAULT_MAX_DATA_LEN_ACTIVE, DEFAULT_PADDING_COUNT);
+    }
+
+    public PrintTable(int maxDataLen) {
+        this.initPrintTable(maxDataLen, true, DEFAULT_PADDING_COUNT);
+    }
+
+    public PrintTable(int maxDataLen, int paddingCount) {
+        this.initPrintTable(maxDataLen, true, paddingCount);
+    }
+
+    private void initPrintTable(int maxDataLen, boolean isMaxDataLenActive, int paddingCount) {
         this.body = new String[0][0];
         this.setPaddingCount(DEFAULT_PADDING_COUNT);
         this.colMaxLen = new int[0];
+
+        if (maxDataLen < DEFAULT_MIN_DATA_LEN) {
+            maxDataLen = DEFAULT_MIN_DATA_LEN;
+        }
+
+        this.isMaxDataLenActive = IS_DEFAULT_MAX_DATA_LEN_ACTIVE;
+        this.maxDataLen = DEFAULT_MAX_DATA_LEN;
     }
 
     // Setters
@@ -86,6 +115,13 @@ public class PrintTable {
 
         for (int i = 0; i < currentRow.length; i++) {
             newRow[i] = currentRow[i];
+        }
+
+        if (this.isMaxDataLenActive) {
+            if (data.length() > this.maxDataLen) {
+                data = data.substring(0, this.maxDataLen - 3);
+                data += "...";
+            }
         }
 
         newRow[newRow.length - 1] = data;
