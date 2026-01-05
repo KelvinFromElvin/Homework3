@@ -1,5 +1,6 @@
 package classes;
 
+import firstData.RealEstateInit;
 import global.Globals;
 import myArrays.PropertyArray;
 import myArrays.UserArray;
@@ -30,90 +31,17 @@ public class RealEstate {
 
     private void initProperties() {
         // O(1)
-        this.properties = new Property[] {
-                new Property(this.cities[0],
-                        this.cities[0].getStreets()[0],
-                        3,
-                        100,
-                        PropertyType.APARTAMENT,
-                        true,
-                        5,
-                        2, this.users[0]),
-                new Property(this.cities[0],
-                        this.cities[0].getStreets()[0],
-                        4,
-                        100,
-                        PropertyType.PENTHOUSE,
-                        true,
-                        5,
-                        4, this.users[1]),
-                new Property(this.cities[0],
-                        this.cities[0].getStreets()[0],
-                        4,
-                        100,
-                        PropertyType.HOME,
-                        true,
-                        5,
-                        0, this.users[1])
-        };
+        this.properties = RealEstateInit.initProperties(this.users, this.cities);
     }
 
     private void initUsers() {
         // O(1)
-        this.users = new User[] {
-                new User("123", "Aa123456%", "0500000123", true),
-                new User("234", "Aa123456%", "0500000234", false)
-        };
+        this.users = RealEstateInit.initUsers();
     }
 
     private void initCities() {
         // O(n * k)
-        City city;
-
-        String[] cityNames = new String[] {
-                "Haifa", // north
-                "Natania", // north
-                "Metola", // north
-                "Afula", // north
-                "Jerusalem", // center
-                "Tel aviv", // center
-                "Ashdod", // center
-                "Raanana", // sharon
-                "Ashkelon", // south
-                "Beer sheva", // negev
-        };
-
-        District[] districts = new District[] {
-                new District(District.NORTH),
-                new District(District.NORTH),
-                new District(District.NORTH),
-                new District(District.NORTH),
-                new District(District.CENTER),
-                new District(District.CENTER),
-                new District(District.CENTER),
-                new District(District.SHARON),
-                new District(District.SOUTH),
-                new District(District.NEGEV)
-        };
-
-        String[] streets = new String[] {
-                "Eli cohen",
-                "Rubin",
-                "Aviha",
-                "Shay"
-        };
-
-        this.cities = new City[10];
-
-        for (int i = 0; i < cityNames.length; i++) {
-            city = new City(cityNames[i], districts[i]);
-
-            for (int j = 0; j < streets.length; j++) {
-                city.addNewStreet(streets[j]);
-            }
-
-            this.cities[i] = city;
-        }
+        this.cities = RealEstateInit.initCities();
     }
 
     // Create new user
