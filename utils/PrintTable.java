@@ -37,11 +37,6 @@ public class PrintTable {
     private boolean isMaxDataLenActive;
 
     public PrintTable() {
-        // this.body = new String[0][0];
-        // this.setPaddingCount(DEFAULT_PADDING_COUNT);
-        // this.colMaxLen = new int[0];
-        // this.isMaxDataLenActive = IS_DEFAULT_MAX_DATA_LEN_ACTIVE;
-        // this.maxDataLen = DEFAULT_MAX_DATA_LEN;
         this.initPrintTable(DEFAULT_MAX_DATA_LEN, IS_DEFAULT_MAX_DATA_LEN_ACTIVE, DEFAULT_PADDING_COUNT);
     }
 
@@ -146,7 +141,7 @@ public class PrintTable {
         String colors = TABLE_HEADER_COLOR;
         String saparateLineTemplate = this.prepareSaparateLineTemplate();
 
-        this.printRowLine(saparateLineTemplate, -1);// O(n * k)
+        this.printRowLine(saparateLineTemplate, -1);
 
         for (int row = 0; row < this.body.length; row++) {
             if (row != 0) {

@@ -17,6 +17,7 @@ public class MyStringBuilder {
 
     // Actions
     private void ensureSize(int sizeToAdd) {
+        // O(n)
         if (this.idx + sizeToAdd < this.size) {
             return;
         }
@@ -25,6 +26,7 @@ public class MyStringBuilder {
     }
 
     private void growSize(int sizeToAdd) {
+        // O(k)
         sizeToAdd = Math.abs(sizeToAdd);
         int newSize = this.size;
         int minCapacity = this.idx + sizeToAdd;
@@ -37,6 +39,7 @@ public class MyStringBuilder {
     }
 
     private void updateAllTextToSize() {
+        // O(n)
         char[] newAllText = new char[this.size];
 
         for (int i = 0; i < this.idx && i < newAllText.length; i++) {
@@ -47,12 +50,14 @@ public class MyStringBuilder {
     }
 
     public MyStringBuilder append(char data) {
+        // O(k)
         this.ensureSize(1);
         this.allText[this.idx++] = data;
         return this;
     }
 
     public MyStringBuilder append(String data) {
+        // O(n)
         if (data == null) {
             data = "null";
         }
@@ -70,6 +75,7 @@ public class MyStringBuilder {
 
     @Override
     public String toString() {
+        // O(k)
         return new String(this.allText, 0, this.idx);
     }
 }
