@@ -85,12 +85,14 @@ public class UserMenu {
 
     private static void printMenu() {
         // O(n * k)
-        Prints.printfln("_§purple_1) _§red_P_§blue_ost new property"); // 1 | p
-        Prints.printfln("_§purple_2) _§red_D_§blue_elete existing property"); // 2 | d
-        Prints.printfln("_§purple_3) _§red_S_§blue_how all properties"); // 3 | s
-        Prints.printfln("_§purple_4) _§blue_Show _§red_a_§blue_ll my properties"); // 4 | a
-        Prints.printfln("_§purple_5) _§blue_S_§red_e_§blue_arch property by parameters"); // 5 | e
-        Prints.printfln("_§purple_6) _§red_L_§blue_ogout"); // 6 | l
+        Prints.printfln("_§purple_%d) _§red_P_§blue_ost new property", POST_NEW_PROPERTY); // 1 | p
+        Prints.printfln("_§purple_%d) _§red_D_§blue_elete existing property", DELETE_PROPERTY); // 2 | d
+        Prints.printfln("_§purple_%d) _§red_S_§blue_how all properties", SHOW_ALL_PROPERTY); // 3 | s
+        Prints.printfln("_§purple_%d) _§blue_Show _§red_a_§blue_ll my properties", SHOW_ALL_MY_PROPERTY); // 4 | a
+        Prints.printfln("_§purple_%d) _§blue_S_§red_e_§blue_arch property by parameters", SEARCH_PROPERTY_BY_PARAMETER); // 5
+                                                                                                                         // |
+                                                                                                                         // e
+        Prints.printfln("_§purple_%d) _§red_L_§blue_ogout", LOGOUT); // 6 | l
     }
 
     public static int decodeUserInput(String userInput) {

@@ -162,4 +162,17 @@ public class Property {
         // O(k)
         return this.user.getUsername().equals(user.getUsername());
     }
+
+    public boolean isUUIDEquals(String uuid) {
+        // O(k)
+        if (this.uuid == null) {
+            return false;
+        }
+
+        if (uuid == null) {
+            return false;
+        }
+
+        return this.uuid.equals(uuid);
+    }
 }

@@ -18,7 +18,7 @@ public class UserCreate {
             errorMsg = User.isPasswordString(password);
 
             if (errorMsg != null) {
-                Prints.printErrorMsg("%s", errorMsg);
+                Prints.printErrorMsg(errorMsg);
             }
         } while (errorMsg != null);
 

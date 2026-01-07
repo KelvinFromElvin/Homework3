@@ -35,7 +35,7 @@ public class RealEstateInit {
                         4,
                         100,
                         PropertyType.HOME,
-                        true,
+                        false,
                         5,
                         0, users[1])
         };

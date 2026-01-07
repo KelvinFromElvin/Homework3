@@ -38,9 +38,9 @@ public class MainMenu {
         Prints.printfln("_§cyan_==========================================_§");
         Prints.printfln("_§cyan_==== _§blue_Welcome to RealEstate board _§red_3000 _§cyan_====_§");
         Prints.printfln("_§cyan_==========================================_§");
-        Prints.printfln("_§purple_1) _§red_C_§blue_reate new account_§");
-        Prints.printfln("_§purple_2) _§red_L_§blue_ogin to your account_§");
-        Prints.printfln("_§purple_3) _§red_E_§blue_xit_§");
+        Prints.printfln("_§purple_%d) _§red_C_§blue_reate new account_§", MainMenu.CREATE_NEW_ACCOUNT);
+        Prints.printfln("_§purple_%d) _§red_L_§blue_ogin to your account_§", MainMenu.LOGIN_TO_YOUR_ACCOUNT);
+        Prints.printfln("_§purple_%d) _§red_E_§blue_xit_§", MainMenu.EXIT_FROM_SOFT);
 
         Prints.printf("Please enter your option: ");
         decodedUserInput = MainMenu.decodeUserInput(Globals.SCANNER.nextLine());// O(n * n)

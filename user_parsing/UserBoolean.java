@@ -6,6 +6,7 @@ import utils.Prints;
 
 public class UserBoolean {
     public static final boolean DEFAULT_FALSE = false;
+    public static final char YES_CHAR = 'y';
 
     public static boolean getUserBoolean(String title) {
         // O(k)
@@ -17,7 +18,7 @@ public class UserBoolean {
             return DEFAULT_FALSE;
         }
 
-        return result.toLowerCase().charAt(0) == 'y';
+        return result.toLowerCase().charAt(0) == YES_CHAR;
     }
 
     public static final int USER_INPUT_TRUE = 1;
@@ -35,7 +36,7 @@ public class UserBoolean {
 
         if (result.equals(skipValue)) {
             return USER_INPUT_SKIP;
-        } else if (result.toLowerCase().charAt(0) == 'y') {
+        } else if (result.toLowerCase().charAt(0) == YES_CHAR) {
             return USER_INPUT_TRUE;
         } else {
             return USER_INPUT_FALSE;

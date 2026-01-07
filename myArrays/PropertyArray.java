@@ -5,6 +5,9 @@ import classes.PropertyType;
 import utils.PrintTable;
 
 public class PropertyArray {
+    private static final String YES_CHAR = "V";
+    private static final String NO_CHAR = "X";
+
     public static Property[] appentToPropertiesArray(Property[] properties, Property property) {
         // O(n)
         Property[] newProperties = new Property[properties.length + 1];
@@ -71,7 +74,7 @@ public class PropertyArray {
             printTable.addData(userProperties[i].getNumberOfRooms() + "");
             printTable.addData(userProperties[i].getPrice() + "");
             printTable.addData(userProperties[i].getPopertyTypeString());
-            printTable.addData(userProperties[i].getAvalibleForRenting() ? "V" : "X");
+            printTable.addData(userProperties[i].getAvalibleForRenting() ? YES_CHAR : NO_CHAR);
             printTable.addData(userProperties[i].getHouseNumber() + "");
             if (PropertyType.isApartament(userProperties[i].getType())) {
                 printTable.addData(userProperties[i].getFloor() + "");

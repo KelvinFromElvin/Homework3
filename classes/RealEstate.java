@@ -361,7 +361,7 @@ public class RealEstate {
     private int findPropertyByUUID(String uuid) {
         // O(n * k)
         for (int i = 0; i < this.properties.length; i++) {
-            if (this.properties[i].getUUID().equals(uuid)) {
+            if (this.properties[i].isUUIDEquals(uuid)) {
                 return i;
             }
         }
