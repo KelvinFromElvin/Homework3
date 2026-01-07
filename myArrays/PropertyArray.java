@@ -53,11 +53,11 @@ public class PropertyArray {
         printTable.addData("District");
         printTable.addData("City");
         printTable.addData("Street");
-        printTable.addData("Number of rooms");
+        printTable.addData("Rooms");
         printTable.addData("Price");
         printTable.addData("Type");
         printTable.addData("Renting");
-        printTable.addData("House number");
+        printTable.addData("House No.");
         printTable.addData("Floor");
         printTable.addData("Name");
         printTable.addData("Phone");

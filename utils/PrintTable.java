@@ -1,5 +1,7 @@
 package utils;
 
+import libs.MyStringBuilder;
+
 public class PrintTable {
     public static final int DEFAULT_PADDING_COUNT = 2;
     public static final char PADDING_CHAR = ' ';
@@ -72,7 +74,7 @@ public class PrintTable {
         }
 
         this.paddingCount = paddingCount;
-        StringBuilder sb = new StringBuilder();
+        MyStringBuilder sb = new MyStringBuilder();
 
         for (int i = 0; i < this.paddingCount; i++) {
             sb.append(PADDING_CHAR);
@@ -162,7 +164,7 @@ public class PrintTable {
 
     private String prepareSaparateLineTemplate() {
         // O(n)
-        StringBuilder sb = new StringBuilder();
+        MyStringBuilder sb = new MyStringBuilder();
 
         sb.append(TABLE_LINES_COLOR);
 
@@ -219,7 +221,7 @@ public class PrintTable {
         int prefPadding = padding;
         int postPadding = padding;
 
-        StringBuilder sb = new StringBuilder();
+        MyStringBuilder sb = new MyStringBuilder();
 
         sb.append(saparatorColor);
 
